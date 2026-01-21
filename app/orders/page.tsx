@@ -1,8 +1,8 @@
-import { getOrders } from "@/lib/watchService";
+import { getOrders, type OrderWithItems } from "@/lib/watchService";
 import { deleteOrder } from "./actions";
 
 export default async function OrdersPage() {
-  const orders = await getOrders();
+  const orders: OrderWithItems[] = await getOrders();
 
   return (
     <div className="min-h-screen bg-[#f7f6f3] text-black">
@@ -26,7 +26,7 @@ export default async function OrdersPage() {
         {/* Orders */}
         <div className="space-y-8">
           {orders.map((order) => {
-            const isPaid = !!order.razorpayPaymentId;
+            const isPaid = Boolean(order.razorpayPaymentId);
             const orderImage = order.orderItems[0]?.watch.images?.[0];
 
             return (
@@ -41,7 +41,9 @@ export default async function OrdersPage() {
                     <p className="font-medium text-sm break-all">{order.id}</p>
 
                     <p className="mt-2 text-sm">
-                      <span className="font-medium">{order.customerName}</span>{" "}
+                      <span className="font-medium">
+                        {order.customerName}
+                      </span>{" "}
                       <span className="text-gray-500">
                         — {order.customerEmail}
                       </span>
@@ -60,7 +62,7 @@ export default async function OrdersPage() {
                       {isPaid ? "PAID" : "NOT PAID"}
                     </span>
 
-                    {/* Remove (always visible) */}
+                    {/* Remove */}
                     <form
                       action={async () => {
                         "use server";
@@ -70,8 +72,7 @@ export default async function OrdersPage() {
                       <button
                         type="submit"
                         className="px-4 py-1.5 text-xs font-medium rounded-full
-                 bg-gray-900 text-white
-                 hover:bg-red-600 transition"
+                        bg-gray-900 text-white hover:bg-red-600 transition"
                       >
                         Remove
                       </button>
@@ -106,7 +107,9 @@ export default async function OrdersPage() {
                           className="flex justify-between items-center text-sm"
                         >
                           <div>
-                            <p className="font-medium">{item.watch.name}</p>
+                            <p className="font-medium">
+                              {item.watch.name}
+                            </p>
                             <p className="text-gray-500 text-xs">
                               {item.watch.brand} • Qty {item.quantity}
                             </p>
@@ -124,7 +127,8 @@ export default async function OrdersPage() {
                 {/* Footer */}
                 <div className="px-6 py-4 border-t flex justify-between text-xs text-gray-500">
                   <span>
-                    Ordered on {new Date(order.createdAt).toLocaleString()}
+                    Ordered on{" "}
+                    {new Date(order.createdAt).toLocaleString()}
                   </span>
                   <span className="font-semibold text-gray-900">
                     Total ₹{order.totalAmount}

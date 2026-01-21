@@ -1,7 +1,13 @@
 import { getOrders, type OrderWithItems } from "@/lib/watchService";
 import { deleteOrder } from "./actions";
+import { redirect } from "next/navigation";
 
 export default async function OrdersPage() {
+    if (typeof window !== "undefined") {
+    if (!localStorage.getItem("auth")) {
+      redirect("/auth");
+    }
+  }
   const orders = (await getOrders()) as OrderWithItems[];
 
   return (

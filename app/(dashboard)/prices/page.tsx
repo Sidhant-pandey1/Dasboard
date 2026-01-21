@@ -1,6 +1,13 @@
 import { updatePrices, rollbackPrices } from "./actions";
+import { redirect } from "next/navigation";
 
 export default function PricesPage() {
+
+    if (typeof window !== "undefined") {
+    if (!localStorage.getItem("auth")) {
+      redirect("/auth");
+    }
+  }
 
   const COLLECTIONS = [
     { label: "Men", value: "men" },

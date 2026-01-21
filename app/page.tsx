@@ -1,4 +1,8 @@
+
+import { redirect } from "next/navigation";
+
 export default function Home() {
+  redirect("/auth")
   return (
     <div className="h-full flex items-center justify-center bg-white">
       <div className="relative rounded-3xl px-16 py-14 bg-white/50 backdrop-blur-xl border border-white/40 shadow-xl">

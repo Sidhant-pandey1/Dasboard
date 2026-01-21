@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  color: black;
+}
+
+.input {
+  @apply w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-black
+         focus:outline-none focus:ring-2 focus:ring-black;
+}
+.label {
+  @apply block text-sm font-medium mb-2 text-black;
+}
+
+.input {
+  @apply w-full rounded-lg border border-gray-300 px-3 py-2 text-sm
+         text-black focus:ring-2 focus:ring-black outline-none;
+}
+
+.pill-ui {
+  @apply px-4 py-2 rounded-full border text-sm cursor-pointer
+         peer-checked:bg-black peer-checked:text-white
+         transition;
+}
+
+.primary-btn {
+  @apply px-6 py-2 rounded-lg bg-black text-white
+         text-sm font-medium hover:opacity-90;
+}
+
+.secondary-btn {
+  @apply px-5 py-2 rounded-lg border border-black text-black
+         text-sm hover:bg-black hover:text-white transition;
+}
+/* globals.css */
+.input {
+  @apply border px-3 py-2 rounded w-full;
+}
+

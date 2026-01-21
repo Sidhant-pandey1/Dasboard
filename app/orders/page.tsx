@@ -2,7 +2,7 @@ import { getOrders, type OrderWithItems } from "@/lib/watchService";
 import { deleteOrder } from "./actions";
 
 export default async function OrdersPage() {
-  const orders: OrderWithItems[] = await getOrders();
+  const orders = (await getOrders()) as OrderWithItems[];
 
   return (
     <div className="min-h-screen bg-[#f7f6f3] text-black">
@@ -23,9 +23,8 @@ export default async function OrdersPage() {
           </div>
         )}
 
-        {/* Orders */}
         <div className="space-y-8">
-          {orders.map((order) => {
+          {orders.map((order: OrderWithItems) => {
             const isPaid = Boolean(order.razorpayPaymentId);
             const orderImage = order.orderItems[0]?.watch.images?.[0];
 
@@ -34,7 +33,7 @@ export default async function OrdersPage() {
                 key={order.id}
                 className="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition"
               >
-                {/* Top Section */}
+                {/* Top */}
                 <div className="p-6 flex justify-between items-start border-b">
                   <div>
                     <p className="text-sm text-gray-500">Order ID</p>
@@ -51,7 +50,6 @@ export default async function OrdersPage() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    {/* Status */}
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-semibold ${
                         isPaid
@@ -62,7 +60,6 @@ export default async function OrdersPage() {
                       {isPaid ? "PAID" : "NOT PAID"}
                     </span>
 
-                    {/* Remove */}
                     <form
                       action={async () => {
                         "use server";
@@ -80,9 +77,8 @@ export default async function OrdersPage() {
                   </div>
                 </div>
 
-                {/* Middle Section */}
+                {/* Middle */}
                 <div className="p-6 flex gap-6">
-                  {/* Image */}
                   {orderImage && (
                     <img
                       src={orderImage}
@@ -91,7 +87,6 @@ export default async function OrdersPage() {
                     />
                   )}
 
-                  {/* Details */}
                   <div className="flex-1">
                     <p className="text-sm text-gray-600 mb-4">
                       <span className="font-medium text-gray-800">

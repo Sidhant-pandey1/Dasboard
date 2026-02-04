@@ -4,7 +4,11 @@ import { redirect } from "next/navigation";
 
 export default function WatchesPage() {
 
-
+    if (typeof window !== "undefined") {
+    if (!localStorage.getItem("auth")) {
+      redirect("/auth");
+    }
+  }
 
   return (
     <div className="min-h-screen bg-white text-black">

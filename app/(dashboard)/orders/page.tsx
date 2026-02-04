@@ -5,7 +5,11 @@ import { redirect } from "next/navigation";
 export const dynamic = "force-dynamic";
 
 export default async function OrdersPage() {
-
+    if (typeof window !== "undefined") {
+    if (!localStorage.getItem("auth")) {
+      redirect("/auth");
+    }
+  }
   const orders = (await getOrders()) as OrderWithItems[];
 
   return (

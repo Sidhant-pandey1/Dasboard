@@ -66,18 +66,27 @@ export default function WatchManager() {
         {error && <p className="text-red-600 mt-3">{error}</p>}
 
         {watch && (
-          <div className="mt-6 p-4 bg-white border rounded-lg">
-            <p className="font-medium">{watch.name}</p>
-            <p className="text-sm text-gray-600">
-              {watch.brand} • ₹{watch.price}
-            </p>
+          <div className="mt-6 p-4 bg-white border rounded-lg flex gap-4">
+            {watch.images && watch.images.length > 0 && (
+              <img
+                src={watch.images[0]}
+                alt={watch.name}
+                className="w-24 h-24 object-cover rounded-md border"
+              />
+            )}
+            <div>
+              <p className="font-medium">{watch.name}</p>
+              <p className="text-sm text-gray-600">
+                {watch.brand} • ₹{watch.price}
+              </p>
 
-            <button
-              onClick={handleDelete}
-              className="mt-4 text-sm bg-red-500 text-white px-4 py-1.5 rounded hover:bg-red-600"
-            >
-              Delete Watch
-            </button>
+              <button
+                onClick={handleDelete}
+                className="mt-4 text-sm bg-red-500 text-white px-4 py-1.5 rounded hover:bg-red-600"
+              >
+                Delete Watch
+              </button>
+            </div>
           </div>
         )}
       </section>

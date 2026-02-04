@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AuthGate from "../AuthGate";
 
 export default function DashboardLayout({
   children,
@@ -6,7 +7,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex">
+    <AuthGate>
+      <div className="min-h-screen flex">
       {/* Sidebar */}
       <aside className="w-64 bg-[#f2efe9] border-r px-6 py-8 flex flex-col">
         <h1 className="text-2xl font-semibold mb-8">Raj Watches</h1>
@@ -27,5 +29,6 @@ export default function DashboardLayout({
       {/* Page */}
       <main className="flex-1 bg-white">{children}</main>
     </div>
+    </AuthGate>
   );
 }
